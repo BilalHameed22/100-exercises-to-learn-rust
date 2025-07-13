@@ -1,6 +1,12 @@
 // Define a function named `factorial` that, given a non-negative integer `n`,
 // returns `n!`, the factorial of `n`.
-//
+fn factorial(n: u32) -> u32 {
+    let mut fact:u32 = 1;
+    for i in 1..=n {
+      fact*=i;
+    }
+    fact
+} 
 // The factorial of `n` is defined as the product of all positive integers up to `n`.
 // For example, `5!` (read "five factorial") is `5 * 4 * 3 * 2 * 1`, which is `120`.
 // `0!` is defined to be `1`.

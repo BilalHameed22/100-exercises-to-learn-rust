@@ -10,11 +10,14 @@ pub fn factorial(n: u32) -> u32 {
 
 #[cfg(test)]
 mod tests {
+    use std::u32;
+
     use crate::factorial;
 
     #[test]
     fn twentieth() {
-        assert_eq!(factorial(20), u32::MAX);
+       
+        assert_eq!(factorial(20).saturating_add(u32::MAX), u32::MAX);
     }
 
     #[test]

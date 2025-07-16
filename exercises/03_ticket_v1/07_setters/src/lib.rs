@@ -34,7 +34,7 @@ impl Ticket {
         }
     }
 
-    pub fn title(&self) -> &String {
+    pub fn title(&mut self) -> &String {
         &self.title
     }
 
@@ -44,6 +44,34 @@ impl Ticket {
 
     pub fn status(&self) -> &String {
         &self.status
+    }
+
+    pub fn set_title(&mut self, new_title: String) -> &Self {
+        if new_title.is_empty() {
+            panic!("Title cannot be empty");
+        }
+        if new_title.len() > 50 {
+            panic!("Title cannot be longer than 50 bytes");
+        }
+        self.title = new_title;
+        self
+    }
+    pub fn set_description(&mut self, new_description: String) -> &Self {
+         if new_description.is_empty() {
+            panic!("Description cannot be empty");
+        }
+        if new_description.len() > 500 {
+            panic!("Description cannot be longer than 500 bytes");
+        }
+        self.description = new_description;
+        self
+    }
+    pub fn set_status (&mut self, new_status: String) -> &Self {
+          if new_status != "To-Do" && new_status != "In Progress" && new_status!= "Done" {
+            panic!("Only `To-Do`, `In Progress`, and `Done` statuses are allowed");
+        }
+        self.status = new_status;
+        self
     }
 }
 
@@ -80,14 +108,14 @@ mod tests {
     #[should_panic(expected = "Title cannot be longer than 50 bytes")]
     fn title_cannot_be_longer_than_fifty_chars() {
         Ticket::new(valid_title(), valid_description(), "To-Do".into())
-            .set_title(overly_long_title())
+            .set_title(overly_long_title());
     }
 
     #[test]
     #[should_panic(expected = "Description cannot be longer than 500 bytes")]
     fn description_cannot_be_longer_than_500_chars() {
         Ticket::new(valid_title(), valid_description(), "To-Do".into())
-            .set_description(overly_long_description())
+            .set_description(overly_long_description());
     }
 
     #[test]
